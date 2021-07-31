@@ -168,9 +168,46 @@ else {
 
 LinkedList.prototype.switchPos = function(pos1, pos2){
   // Tu código aca:
+  if (pos1>this.size() || pos2>this.size()){
+    return false;
+  } 
+  if( pos1<0 || pos2 <0){
+    return false;
+  }
+  if(!this.head){
+    return false;
+  }
 
+  if(this.head.next === null){
+    var unicoNodo = this.head;
+    this.head = null;
+    return false;
+  }
+ 
+  var pasos=0;
+  var current2=this.head;
+  var primero= buscarPorPos(pos1);
+  var segundo= buscarPorPos(pos2);
+    while(pasos < pos2-1 ) {
+      current2= current2.next;
+      pasos++;
+    }
+    current2.next=segundo.next;
+    segundo.next=primero.next;
+    primero.next= curren2.next;
+    current2.next= primero;
+   return true;
+    }
+ LinkedList.prototype.buscarPorPos= function (pos){
+ var current=this.head;
+ if (pos===0) return this.head;
+ var pasos=0;  
+  while(pasos!==pos){
+    current=current.next;
+    pasos++;
+  }
+  return current;
 }
-
 // EJERCICIO 5
 // Implementar la función mergeLinkedLists que, a partir de dos listas simplemente enlazadas 
 // del mismo tamaño retorne una nueva lista con los elementos de ambas listas
@@ -184,10 +221,34 @@ LinkedList.prototype.switchPos = function(pos1, pos2){
 // Continuando con el nodo 2 de la lista 2, conectandose con el nodo 2 de la lista 2.
 var mergeLinkedLists = function(linkedListOne, linkedListTwo){
   // Tu código aca:
-  var nueva= new LinkedList();
-  var current1= linkedListOne.head;  //bindeo
+ /* var nuevaLista= new LinkedList();
+  var current1= linkedListOne.head;  
+  var current2= linkedListTwo.head;
+  var array1=[];
+  var array2=[];
+  var combinados=[];
+  while(current1){
+      array1.push(current1.value);
+      current1=current1.next;
+    }
+  while(current2){
+    array2.push(current2.value);
+      current2=current2.next;
+   }
+  var n=0;
+  while(array1[n] || array2[n]) 
+    if ((n+2)%2 ===0 && array1[n]){
+      combinados.push(array1[n]);
 
+  }else if((n+2)%2 !==0 && array2[n]){
+    combinados.push(array2[n]);
+  }
+  n++;
+ for(let i=0; i<combinados.length;i++){ 
+  nuevaLista.add(combinados[i]);
+}*/
 }
+
 
 
 // ----------------------
@@ -234,7 +295,9 @@ var mergeLinkedLists = function(linkedListOne, linkedListTwo){
 
 var cardGame = function(playerOneCards, playerTwoCards){
   // Tu código aca:
-
+var castillo1=100;
+var castillo2= 100;
+playerOneCards
 }
 
 // ---------------
@@ -258,6 +321,23 @@ var cardGame = function(playerOneCards, playerTwoCards){
 
 BinarySearchTree.prototype.height = function(){
   // Tu código aca:
+  var maximoAb=0;
+  var maxRel=0;
+   
+  while (this.left || this.right){
+    if (this.left) {
+      return this.lefth.height()
+    }
+    if(this.right){
+      return this.raigth.height();
+    }
+    maxRel++;
+  }
+  if (maxRel<maximoAb){
+    maxRel=0;
+  };
+
+  return Math.max(maxRel,maximoAb)
 
 }
 
@@ -279,8 +359,24 @@ BinarySearchTree.prototype.height = function(){
 
 
 var binarySearch = function (array, target) {
-  // Tu código aca:
-
+  // Tu código aca: 
+ var medio= Math.floor(array.length/2);
+ if (array[medio]=== target) {return medio;}
+ if  (array[medio]>target && array[medio-1]<target){
+   return -1;
+ }
+ if  (array[medio]<target && array[medio+1]>target){
+  return -1;
+}
+ if (array[medio]>target){
+   var cortado= array.slice(0,medio);
+   return binarySearch(cortado,target);
+ }
+ if(array[medio]< target && array[medio+1]<target){
+   var corte= array.slice(medio);
+   return (medio+ binarySearch(corte,target)); 
+ }
+ return array.indexOf(target);
 }
 
 // EJERCICIO 9
@@ -341,7 +437,23 @@ var specialSort = function(array, orderFunction) {
 
 function closureDetect(symptoms, min) {
   // Tu código aca:
+  var contador=0;
+  return function (obj){
+    if (obj.symptoms.length>min && symptoms!== symptomsAngina){
+      return true;
+    } 
 
+    for (var i=0; i<obj.symptoms.length ; i++){
+      if (symptoms.indexOf(obj.symptoms[i])>-1){
+        contador= contador+1;
+      }
+    }
+    if (contador>min){
+      return true;
+    }else{
+      return false;
+    }    
+  }
 }
 
 // -------------------
